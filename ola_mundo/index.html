@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <!-- Include the CesiumJS JavaScript and CSS files -->
+
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Cesium.js"></script>
+
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div id="cesiumContainer"></div>
+
+  <script>
+var viewer = new Cesium.Viewer('cesiumContainer');
+
+/* Cesium.Cartesian3.fromDegreesArray(coordinates, ellipsoid, result) → Array.<Cartesian3>
+
+Returns an array of Cartesian3 positions given an array
+of longitude and latitude values given in degrees. */
+
+var wyoming = viewer.entities.add({
+  polygon : {
+    hierarchy : Cesium.Cartesian3.fromDegreesArray([
+                              -109.080842,45.002073,
+                              -105.91517,45.002073,
+                              -104.058488,44.996596,
+                              -104.053011,43.002989,
+                              -104.053011,41.003906,
+                              -105.728954,40.998429,
+                              -107.919731,41.003906,
+                              -109.04798,40.998429,
+                              -111.047063,40.998429,
+                              -111.047063,42.000709,
+                              -111.047063,44.476286,
+                              -111.05254,45.002073]),
+    height : 0,
+    material : Cesium.Color.RED.withAlpha(0.5),
+    outline : true,
+    outlineColor : Cesium.Color.BLACK
+  }
+});
+
+viewer.zoomTo(wyoming);
+
+  </script>
+
+ </div>
+
+</body>
+
+</html>
+
