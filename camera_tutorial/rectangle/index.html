@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <!-- Include the CesiumJS JavaScript and CSS files -->
+
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Cesium.js"></script>
+
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div id="cesiumContainer"></div>
+
+  <script>
+var viewer = new Cesium.Viewer("cesiumContainer");
+
+var west = -90.0;
+var south = 38.0;
+var east = -87.0;
+var north = 40.0;
+var rectangle = viewer.entities.add({
+  rectangle: {
+      coordinates: Cesium.Rectangle.fromDegrees(west, south, east, north),
+  },
+});
+viewer.flyTo(rectangle);
+
+  </script>
+
+ </div>
+
+</body>
+
+</html>
+
