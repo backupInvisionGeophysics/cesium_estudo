@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <!-- Include the CesiumJS JavaScript and CSS files -->
+
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Cesium.js"></script>
+
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div id="cesiumContainer"></div>
+
+  <script>
+var viewer = new Cesium.Viewer("cesiumContainer");
+
+var viewer = new Cesium.Viewer('cesiumContainer', {
+    terrainProvider: Cesium.createWorldTerrain()
+});
+
+var handler = new Cesium.ScreenSpaceEventHandler(viewer.canvas);
+handler.setInputAction(function (event) {
+  var pickedPosition = viewer.scene.pickPosition(event.position);
+  if (Cesium.defined(pickedPosition)) {
+    console.log(pickedPosition);
+  }
+}, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+  </script>
+
+ </div>
+
+</body>
+
+</html>
+
