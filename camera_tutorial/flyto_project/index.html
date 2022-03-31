@@ -26,18 +26,31 @@
 		<input type="submit" value="search">
 	</form>
 
-	<div id="cesiumContainer"></div>
+	<div id="cesiumContainer" style="height:90%;width:80%"></div>
 
 <script>
 	var viewer = new Cesium.Viewer('cesiumContainer', {
 	    terrainProvider: Cesium.createWorldTerrain()
 	});
 
+	function isEmpty(str) {
+	    return (!str || str.length === 0 );
+	}
+
 	$("#form").submit(function(e){
 		e.preventDefault();
 		const x = $("#x").val();
 		const y = $("#y").val();
 		const z = $("#z").val();
+		if(isNaN(x) || isNaN(y) || isNaN(z)){
+			alert("Error: Invalid coordinates!");
+			return;
+		}
+		if(isEmpty(x) || isEmpty(y) || isEmpty(z)){
+			alert("Error: Empty coordinates!");
+			return;
+		}
+
 		console.log(x);
 		console.log(y);
 		console.log(z);
