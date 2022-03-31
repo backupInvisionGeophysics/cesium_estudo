@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <!-- Include the CesiumJS JavaScript and CSS files -->
+
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Cesium.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<h1>Put on a coordinate to search</h1>
+	<form id="form">
+		<input id="x" type="text" name="x" placeholder="x"><br>
+		<input id="y" type="text" name="y" placeholder="y"><br>
+		<input id="z" type="text" name="z" placeholder="z"><br>
+		<input type="submit" value="search">
+	</form>
+
+	<div id="cesiumContainer"></div>
+
+<script>
+	var viewer = new Cesium.Viewer('cesiumContainer', {
+	    terrainProvider: Cesium.createWorldTerrain()
+	});
+
+	$("#form").submit(function(e){
+		e.preventDefault();
+		const x = $("#x").val();
+		const y = $("#y").val();
+		const z = $("#z").val();
+		console.log(x);
+		console.log(y);
+		console.log(z);
+		viewer.camera.flyTo({
+			destination: Cesium.Cartesian3.fromDegrees(x, y, z)
+		});
+	});
+</script>
+
+</body>
+
+</html>
