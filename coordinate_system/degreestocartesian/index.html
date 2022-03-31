@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <!-- Include the CesiumJS JavaScript and CSS files -->
+
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Cesium.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<h1>Converter de Grau Decimal para radianos</h1>
+<form id="form">
+	<input type="text" id="latitude" name="latitude"><br>
+	<input type="text" id="longitude" name="longitude"><br>
+	<input type="text" id="height" name="height"><br>
+	<input type="submit" value="Calcular"><br>
+
+</form>
+
+<div id="result" style="margin:20px"></div>
+  <script>
+	/*
+	Snipet from
+	https://stackoverflow.com/questions/28358403/how-to-convert-x-y-z-to-longitude-latitude-altitude-in-cesium
+	var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+	console.log(
+	    'lon ' + Cesium.Math.toDegrees(cartographic.longitude) + ', ' +
+	    'lat ' + Cesium.Math.toDegrees(cartographic.latitude) + ', ' +
+	    'alt ' + cartographic.height);
+
+	var position = Cesium.Cartesian3.fromDegrees(-106.690647, 36.806761, 0);
+	var offset = new Cesium.Cartesian3(-150.9, 126.26, 217.7);
+	Cesium.Cartesian3.add(position, offset, position);*/
+
+	$("#form").submit(function(e){
+		e.preventDefault();
+
+		const longitude = $("#latitude").val();
+		const latitude = $("#longitude").val();
+		const height = $("#height").val();
+
+		var position = Cesium.Cartesian3.fromDegrees(longitude,latitude,height);
+		console.log(position);
+
+		var cartographic = Cesium.Cartographic.fromCartesian(position);
+
+		// Show radians
+		$("#result").html("<p>long: "+cartographic.longitude+"<br>lat: "+cartographic.latitude+'<br>height: '+cartographic.height+"</p>");
+
+		// Show decimal degrees
+		console.log(Cesium.Math.toDegrees(cartographic.longitude));
+		console.log(Cesium.Math.toDegrees(cartographic.latitude));
+		console.log(cartographic.height);
+	});
+  </script>
+
+ </div>
+
+</body>
+
+</html>
+
