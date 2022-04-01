@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <!-- Include the CesiumJS JavaScript and CSS files -->
+
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Cesium.js"></script>
+
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.91/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+<!--<style>
+      @import url(../templates/bucket.css);
+    </style>-->
+</head>
+
+	<div id="cesiumContainer"></div>
+
+<body>
+
+<!--	<img src="barrage.png" style="position:absolute" id="htmlOverlay">-->
+
+  <script>
+var viewer = new Cesium.Viewer('cesiumContainer');
+
+const layers = viewer.scene.imageryLayers;
+layers.addImageryProvider(new Cesium.SingleTileImageryProvider({
+    url : 'teste.jpg',
+    rectangle : Cesium.Rectangle.fromDegrees(-48.524887,-1.482978,-48.409195,-1.414801)
+}));
+  </script>
+
+ </div>
+
+</body>
+
+</html>
+
