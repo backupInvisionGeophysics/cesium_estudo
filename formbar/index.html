@@ -17,7 +17,7 @@
 			z-index: 1;
 			margin: 5px;
 			width: 36%;
-			height: 8.5em;
+			height: 9.5em;
 			padding: 5px;
 			background: linear-gradient(to bottom,rgba(116,117,119,.8) 0,rgba(58,68,82,.8) 11%,rgba(46,50,56,.8) 46%,rgba(53,53,53,.8) 81%,rgba(53,53,53,.8) 100%);
 		}
@@ -53,6 +53,10 @@
 		}
 		.row{
 			padding: 3px;
+		}
+		.alpha{
+			display: grid;
+			grid-template-columns: auto auto auto;
 		}
 	</style>
 </head>
@@ -109,10 +113,21 @@
 					</span>
 				</div>
 				<div class="buttons row">
-					<input type="button" id="model1" value="Model 1">
-					<input type="button" id="model2" value="Model 2">
-					<input type="button" id="sensor" value="Sensor">
-					<input type="button" id="sphere" value="Sphere">
+					<input type="button" id="model1" value="Model 1" title="Go to model 1">
+					<input type="button" id="model2" value="Model 2" title="Go to model 2">
+					<input type="button" id="sensor" value="Sensor" title="Show sensors">
+					<input type="button" id="sphere" value="Sphere" title="Show spheres">
+				</div>
+				<div class="alpha row">
+					<div>
+						<span>Model 1 alpha</span>
+					</div>
+					<div>
+						<span><input type="range" id="model1-alpha" value=100 defaultValue=100></span>
+					</div>
+					<div>
+						<span id="alpha-value">100</span>
+					</div>
 				</div>
 			</form>
 		</div>
@@ -122,7 +137,10 @@
 <script>
 Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwYmRjYzU3Ny0wMGVkLTQ1MzUtYTM2NS1mNmY1ZDZlMWEyOWYiLCJpZCI6ODY0MTIsImlhdCI6MTY0NzgxMTE2Mn0.mRqOX55qk8WGHhNY76VkEkPem8KglusF4EnVKD380ZA";
 
-const viewer = new Cesium.Viewer("cesiumContainer");
+const viewer = new Cesium.Viewer("cesiumContainer",{
+				animation: false,
+				fullscreenElement: 'cesiumContainer'
+				});
 window.viewer = viewer;
 
 const model1 = viewer.imageryLayers.addImageryProvider(
@@ -133,6 +151,15 @@ const model2 = viewer.imageryLayers.addImageryProvider(
   new Cesium.IonImageryProvider({ assetId: 935282 })
 );
 
+const checkbox = document.getElementById('eventos');
+
+checkbox.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+    alert('checked');
+  } else {
+    alert('not checked');
+  }
+})
 
 document.getElementById("model1").addEventListener("click",
 	function(){
@@ -187,6 +214,15 @@ document.getElementById("sphere").addEventListener("click",
 	}
 );
 
+
+let range = document.getElementById("model1-alpha");
+
+range.value = 100;
+range.addEventListener("input",function(e){
+	let alpha = parseInt(e.target.value);
+	model1.alpha = alpha/100;
+	document.getElementById("alpha-value").innerHTML = alpha;
+});
 
 </script>
 </body>
